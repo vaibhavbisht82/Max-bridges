@@ -1,0 +1,17 @@
+public class MaxBridges {
+    public static int maxBridges(int[] a, int[] b, int i, int j) {
+        if (i == a.length || j == b.length) return 0;
+
+        if (a[i] == b[j]) {
+            return 1 + maxBridges(a, b, i + 1, j + 1);
+        } else {
+            return Math.max(maxBridges(a, b, i + 1, j), maxBridges(a, b, i, j + 1));
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] a = {1, 1, 2, 1};
+        int[] b = {1, 2, 1, 2, 1};
+        System.out.println(maxBridges(a, b, 0, 0));
+    }
+}
