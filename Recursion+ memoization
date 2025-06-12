@@ -1,0 +1,25 @@
+public class MaxBridgesMemo {
+    public static int maxBridges(int[] a, int[] b, int i, int j, int[][] dp) {
+        if (i == a.length || j == b.length) return 0;
+
+        if (dp[i][j] != -1) return dp[i][j];
+
+        if (a[i] == b[j]) {
+            dp[i][j] = 1 + maxBridges(a, b, i + 1, j + 1, dp);
+        } else {
+            dp[i][j] = Math.max(maxBridges(a, b, i + 1, j, dp), maxBridges(a, b, i, j + 1, dp));
+        }
+        return dp[i][j];
+    }
+
+    public static void main(String[] args) {
+        int[] a = {1, 1, 2, 1};
+        int[] b = {1, 2, 1, 2, 1};
+        int[][] dp = new int[a.length][b.length];
+        for (int i = 0; i < a.length; i++)
+            for (int j = 0; j < b.length; j++)
+                dp[i][j] = -1;
+
+        System.out.println(maxBridges(a, b, 0, 0, dp));
+    }
+}
